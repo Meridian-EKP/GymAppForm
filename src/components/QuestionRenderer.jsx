@@ -53,10 +53,10 @@ const QuestionRenderer = ({ question, value, onChange }) => {
               return (
                 <label
                   key={idx}
-                  className="flex items-center p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 hover:bg-primary-50 hover:border-primary-300"
+                  className="flex items-center p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 hover:bg-gray-700 hover:border-primary-400"
                   style={{
-                    borderColor: value === optionValue ? '#0ea5e9' : '#e5e7eb',
-                    backgroundColor: value === optionValue ? '#f0f9ff' : 'white'
+                    borderColor: value === optionValue ? '#be185d' : '#4b5563',
+                    backgroundColor: value === optionValue ? '#1f2937' : '#1f2937'
                   }}
                 >
                   <input
@@ -68,7 +68,7 @@ const QuestionRenderer = ({ question, value, onChange }) => {
                     className="ui-radio"
                     required={question.required}
                   />
-                  <span className="ml-3 text-gray-700 font-medium">{optionLabel}</span>
+                  <span className="ml-3 text-white font-medium">{optionLabel}</span>
                 </label>
               )
             })}
@@ -86,10 +86,10 @@ const QuestionRenderer = ({ question, value, onChange }) => {
               return (
                 <label
                   key={idx}
-                  className="flex items-center p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 hover:bg-primary-50 hover:border-primary-300"
+                  className="flex items-center p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 hover:bg-gray-700 hover:border-primary-400"
                   style={{
-                    borderColor: isChecked ? '#0ea5e9' : '#e5e7eb',
-                    backgroundColor: isChecked ? '#f0f9ff' : 'white'
+                    borderColor: isChecked ? '#be185d' : '#4b5563',
+                    backgroundColor: isChecked ? '#1f2937' : '#1f2937'
                   }}
                 >
                   <input
@@ -107,7 +107,7 @@ const QuestionRenderer = ({ question, value, onChange }) => {
                     }}
                     className="ui-checkbox"
                   />
-                  <span className="ml-3 text-gray-700 font-medium">{optionLabel}</span>
+                  <span className="ml-3 text-white font-medium">{optionLabel}</span>
                 </label>
               )
             })}
@@ -161,11 +161,11 @@ const QuestionRenderer = ({ question, value, onChange }) => {
     <div className="space-y-4">
       <label className="form-label text-xl">
         {question.label}
-        {question.required && <span className="text-red-500 ml-1">*</span>}
+        {question.required && <span className="text-red-400 ml-1">*</span>}
       </label>
       
       {question.description && (
-        <p className="text-gray-600 text-sm mb-4">{question.description}</p>
+        <p className="text-gray-400 text-sm mb-4">{question.description}</p>
       )}
       
       {renderInput()}

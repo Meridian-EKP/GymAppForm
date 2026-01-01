@@ -269,18 +269,18 @@ const FormContainer = () => {
   if (isSubmitted) {
     return (
       <div className="w-full max-w-2xl">
-        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
-          <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white p-8 text-center">
+        <div className="bg-gray-800 rounded-2xl shadow-2xl overflow-hidden">
+          <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white p-8 text-center">
             <div className="text-6xl mb-4">✓</div>
             <h1 className="text-3xl font-bold mb-2">Thank You!</h1>
-            <p className="text-green-100 text-lg">Your responses have been submitted successfully.</p>
+            <p className="text-primary-100 text-lg">Your responses have been submitted successfully.</p>
           </div>
-          <div className="p-12 text-center">
-            <p className="text-gray-700 text-lg mb-6">
+          <div className="p-12 text-center bg-gray-800">
+            <p className="text-white text-lg mb-6">
               Your feedback helps us build a better fitness app experience. We appreciate you taking the time to share your thoughts!
             </p>
-            <div className="bg-primary-50 rounded-lg p-6">
-              <p className="text-sm text-gray-600">
+            <div className="bg-gray-700 rounded-lg p-6">
+              <p className="text-sm text-gray-300">
                 <strong>What's next?</strong> We'll review your responses and use them to improve our app concept. 
                 Stay tuned for updates!
               </p>
@@ -294,7 +294,7 @@ const FormContainer = () => {
   
   return (
     <div className="w-full max-w-2xl">
-      <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+      <div className="bg-gray-800 rounded-2xl shadow-2xl overflow-hidden">
         <FormHeader 
           appDescription={null}
           currentStep={currentStep}

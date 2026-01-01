@@ -8,9 +8,9 @@ const FormFooter = ({ currentStep, totalSteps, currentQuestion, formData, onNext
   const isAnswerRequired = currentQuestion?.required && !formData[currentQuestion?.name]
   
   return (
-    <div className="mt-8 pt-6 border-t border-gray-200">
+    <div className="mt-8 pt-6 border-t border-gray-700">
       {isAnswerRequired && (
-        <p className="text-red-500 text-sm mb-4 text-center">
+        <p className="text-red-400 text-sm mb-4 text-center">
           Please answer this question to continue
         </p>
       )}

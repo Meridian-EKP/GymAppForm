@@ -17,7 +17,7 @@ const FormQuestions = ({ questions, currentStep, formData, onInputChange }) => {
   if (!currentQuestion) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-600">No question available at this step.</p>
+        <p className="text-gray-400">No question available at this step.</p>
       </div>
     )
   }
@@ -41,11 +41,11 @@ const FormQuestions = ({ questions, currentStep, formData, onInputChange }) => {
   return (
     <div className="min-h-[300px]">
       {isNewSection && currentQuestion.section && (
-        <div className="mb-6 pb-4 border-b-2 border-primary-200">
-          <h2 className="text-2xl font-bold text-primary-700">
+        <div className="mb-6 pb-4 border-b-2 border-primary-600">
+          <h2 className="text-2xl font-bold text-primary-400">
             Section {getSectionNumber()}: {currentQuestion.section}
           </h2>
-          <p className="text-sm text-gray-600 mt-1">
+          <p className="text-sm text-gray-400 mt-1">
             {currentQuestion.section === 'About You' && 'Tell us a bit about yourself'}
             {currentQuestion.section === 'Motivation & Accountability' && 'Understanding what drives you'}
             {currentQuestion.section === 'App Concept' && 'Your thoughts on the app idea'}

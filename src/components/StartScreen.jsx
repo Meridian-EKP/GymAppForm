@@ -1,7 +1,7 @@
 const StartScreen = ({ appDescription, onStart }) => {
   return (
-    <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
-      <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white p-12 text-center">
+    <div className="bg-gray-800 rounded-2xl shadow-2xl overflow-hidden">
+      <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white p-12 text-center">
         <h1 className="text-4xl font-bold mb-6">Fitness App Survey</h1>
         <p className="text-primary-100 text-base leading-relaxed max-w-2xl mx-auto mb-8">
           {appDescription}
@@ -16,10 +16,10 @@ const StartScreen = ({ appDescription, onStart }) => {
           Start Survey
         </button>
       </div>
-      <div className="p-8 text-center">
-        <div className="bg-primary-50 rounded-lg p-6 mb-6">
-          <h3 className="font-semibold text-gray-800 mb-2">What to expect:</h3>
-          <ul className="text-sm text-gray-600 space-y-1">
+      <div className="p-8 text-center bg-gray-800">
+        <div className="bg-gray-700 rounded-lg p-6 mb-6">
+          <h3 className="font-semibold text-white mb-2">What to expect:</h3>
+          <ul className="text-sm text-gray-300 space-y-1">
             <li>• 15 quick questions</li>
             <li>• Takes less than 5 minutes</li>
             <li>• Your feedback will help shape this app</li>
