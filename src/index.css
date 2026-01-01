@@ -1,0 +1,238 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 min-h-screen;
+  }
+}
+
+@layer components {
+  .form-input {
+    @apply w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 bg-white shadow-sm;
+  }
+  
+  .form-label {
+    @apply block text-sm font-semibold text-gray-700 mb-2;
+  }
+  
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary-600 to-primary-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none;
+  }
+  
+  .btn-secondary {
+    @apply bg-white text-primary-700 font-semibold py-3 px-8 rounded-lg border-2 border-primary-600 hover:bg-primary-50 transition-all duration-200;
+  }
+}
+
+/* From Uiverse.io by Galahhad */
+/* checkbox settings 👇 */
+input[type="checkbox"].ui-checkbox {
+  --primary-color: #0ea5e9 !important;
+  --secondary-color: #fff !important;
+  --primary-hover-color: #0284c7 !important;
+  /* checkbox */
+  --checkbox-diameter: 20px !important;
+  --checkbox-border-radius: 5px !important;
+  --checkbox-border-color: #d9d9d9 !important;
+  --checkbox-border-width: 1px !important;
+  --checkbox-border-style: solid !important;
+  /* checkmark */
+  --checkmark-size: 1.2 !important;
+}
+
+input[type="checkbox"].ui-checkbox, 
+input[type="checkbox"].ui-checkbox *, 
+input[type="checkbox"].ui-checkbox *::before, 
+input[type="checkbox"].ui-checkbox *::after {
+  -webkit-box-sizing: border-box !important;
+  box-sizing: border-box !important;
+}
+
+input[type="checkbox"].ui-checkbox {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  width: var(--checkbox-diameter) !important;
+  height: var(--checkbox-diameter) !important;
+  border-radius: var(--checkbox-border-radius) !important;
+  background: var(--secondary-color) !important;
+  border: var(--checkbox-border-width) var(--checkbox-border-style) var(--checkbox-border-color) !important;
+  -webkit-transition: all 0.3s !important;
+  -o-transition: all 0.3s !important;
+  transition: all 0.3s !important;
+  cursor: pointer !important;
+  position: relative !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+input[type="checkbox"].ui-checkbox::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  -webkit-box-shadow: 0 0 0 calc(var(--checkbox-diameter) / 2.5) var(--primary-color) !important;
+  box-shadow: 0 0 0 calc(var(--checkbox-diameter) / 2.5) var(--primary-color) !important;
+  border-radius: inherit !important;
+  opacity: 0 !important;
+  -webkit-transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46) !important;
+  -o-transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46) !important;
+  transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46) !important;
+}
+
+input[type="checkbox"].ui-checkbox::before {
+  top: 40% !important;
+  left: 50% !important;
+  content: "" !important;
+  position: absolute !important;
+  width: 4px !important;
+  height: 7px !important;
+  border-right: 2px solid var(--secondary-color) !important;
+  border-bottom: 2px solid var(--secondary-color) !important;
+  -webkit-transform: translate(-50%, -50%) rotate(45deg) scale(0) !important;
+  -ms-transform: translate(-50%, -50%) rotate(45deg) scale(0) !important;
+  transform: translate(-50%, -50%) rotate(45deg) scale(0) !important;
+  opacity: 0 !important;
+  -webkit-transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s !important;
+  -o-transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s !important;
+  transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s !important;
+}
+
+/* actions */
+input[type="checkbox"].ui-checkbox:hover {
+  border-color: var(--primary-color) !important;
+}
+
+input[type="checkbox"].ui-checkbox:checked {
+  background: var(--primary-color) !important;
+  border-color: transparent !important;
+}
+
+input[type="checkbox"].ui-checkbox:checked::before {
+  opacity: 1 !important;
+  -webkit-transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size)) !important;
+  -ms-transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size)) !important;
+  transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size)) !important;
+  -webkit-transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s !important;
+  -o-transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s !important;
+  transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s !important;
+}
+
+input[type="checkbox"].ui-checkbox:active:not(:checked)::after {
+  -webkit-transition: none !important;
+  -o-transition: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  transition: none !important;
+  opacity: 1 !important;
+}
+
+/* Custom Radio Button Style - Similar to checkbox but circular */
+input[type="radio"].ui-radio {
+  --primary-color: #0ea5e9 !important;
+  --secondary-color: #fff !important;
+  --primary-hover-color: #0284c7 !important;
+  /* radio */
+  --radio-diameter: 20px !important;
+  --radio-border-color: #d9d9d9 !important;
+  --radio-border-width: 1px !important;
+  --radio-border-style: solid !important;
+  /* inner dot */
+  --dot-size: 0.6 !important;
+}
+
+input[type="radio"].ui-radio, 
+input[type="radio"].ui-radio *, 
+input[type="radio"].ui-radio *::before, 
+input[type="radio"].ui-radio *::after {
+  -webkit-box-sizing: border-box !important;
+  box-sizing: border-box !important;
+}
+
+input[type="radio"].ui-radio {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  width: var(--radio-diameter) !important;
+  height: var(--radio-diameter) !important;
+  border-radius: 50% !important;
+  background: var(--secondary-color) !important;
+  border: var(--radio-border-width) var(--radio-border-style) var(--radio-border-color) !important;
+  -webkit-transition: all 0.3s !important;
+  -o-transition: all 0.3s !important;
+  transition: all 0.3s !important;
+  cursor: pointer !important;
+  position: relative !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+input[type="radio"].ui-radio::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  -webkit-box-shadow: 0 0 0 calc(var(--radio-diameter) / 2.5) var(--primary-color) !important;
+  box-shadow: 0 0 0 calc(var(--radio-diameter) / 2.5) var(--primary-color) !important;
+  border-radius: 50% !important;
+  opacity: 0 !important;
+  -webkit-transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46) !important;
+  -o-transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46) !important;
+  transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46) !important;
+}
+
+input[type="radio"].ui-radio::before {
+  top: 50% !important;
+  left: 50% !important;
+  content: "" !important;
+  position: absolute !important;
+  width: calc(var(--radio-diameter) * var(--dot-size)) !important;
+  height: calc(var(--radio-diameter) * var(--dot-size)) !important;
+  border-radius: 50% !important;
+  background: var(--secondary-color) !important;
+  -webkit-transform: translate(-50%, -50%) scale(0) !important;
+  -ms-transform: translate(-50%, -50%) scale(0) !important;
+  transform: translate(-50%, -50%) scale(0) !important;
+  opacity: 0 !important;
+  -webkit-transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s !important;
+  -o-transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s !important;
+  transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s !important;
+}
+
+/* actions */
+input[type="radio"].ui-radio:hover {
+  border-color: var(--primary-color) !important;
+}
+
+input[type="radio"].ui-radio:checked {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+input[type="radio"].ui-radio:checked::before {
+  opacity: 1 !important;
+  -webkit-transform: translate(-50%, -50%) scale(var(--dot-size)) !important;
+  -ms-transform: translate(-50%, -50%) scale(var(--dot-size)) !important;
+  transform: translate(-50%, -50%) scale(var(--dot-size)) !important;
+  -webkit-transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s !important;
+  -o-transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s !important;
+  transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s !important;
+}
+
+input[type="radio"].ui-radio:active:not(:checked)::after {
+  -webkit-transition: none !important;
+  -o-transition: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  transition: none !important;
+  opacity: 1 !important;
+}
+
