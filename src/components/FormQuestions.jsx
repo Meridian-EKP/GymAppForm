@@ -48,7 +48,6 @@ const FormQuestions = ({ questions, currentStep, formData, onInputChange }) => {
           <p className="text-sm text-gray-400 mt-1">
             {currentQuestion.section === 'About You' && 'Tell us a bit about yourself'}
             {currentQuestion.section === 'Motivation & Accountability' && 'Understanding what drives you'}
-            {currentQuestion.section === 'App Concept' && 'Your thoughts on the app idea'}
             {currentQuestion.section === 'Fairness & Proof' && 'How challenges should work'}
             {currentQuestion.section === 'Money & PTs' && 'Financial aspects and trainers'}
           </p>

@@ -161,7 +161,6 @@ const QuestionRenderer = ({ question, value, onChange }) => {
     <div className="space-y-4">
       <label className="form-label text-xl">
         {question.label}
-        {question.required && <span className="text-red-400 ml-1">*</span>}
       </label>
       
       {question.description && (

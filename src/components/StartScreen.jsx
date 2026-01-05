@@ -18,9 +18,8 @@ const StartScreen = ({ appDescription, onStart }) => {
       </div>
       <div className="p-8 text-center bg-gray-800">
         <div className="bg-gray-700 rounded-lg p-6 mb-6">
-          <h3 className="font-semibold text-white mb-2">What to expect:</h3>
           <ul className="text-sm text-gray-300 space-y-1">
-            <li>• 15 quick questions</li>
+            <li>• 10 quick questions</li>
             <li>• Takes less than 5 minutes</li>
             <li>• Your feedback will help shape this app</li>
           </ul>

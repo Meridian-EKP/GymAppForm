@@ -4,6 +4,7 @@ import FormQuestions from './FormQuestions'
 import FormFooter from './FormFooter'
 import PoweredByFooter from './PoweredByFooter'
 import StartScreen from './StartScreen'
+import { saveSubmission } from '../utils/submissionStorage'
 
 const FormContainer = () => {
   const [hasStarted, setHasStarted] = useState(false)
@@ -77,7 +78,6 @@ const FormContainer = () => {
       required: true,
       options: [
         'Friendly competition',
-        'Accountability to friends',
         'Financial incentive',
         'Coaching/support',
         'Personal progress only'
@@ -96,84 +96,17 @@ const FormContainer = () => {
         'Not at all'
       ]
     },
-    // Section 3: App Concept
-    {
-      name: 'app_appeal',
-      label: 'How appealing is this app idea overall?',
-      type: 'radio',
-      section: 'App Concept',
-      required: true,
-      options: [
-        'Very appealing',
-        'Somewhat appealing',
-        'Neutral',
-        'Not appealing'
-      ]
-    },
-    {
-      name: 'try_likelihood',
-      label: 'How likely would you be to try this app if it launched?',
-      type: 'radio',
-      section: 'App Concept',
-      required: true,
-      options: [
-        'Very likely',
-        'Likely',
-        'Unsure',
-        'Unlikely'
-      ]
-    },
-    {
-      name: 'use_with',
-      label: 'Who would you most likely use this app with?',
-      type: 'radio',
-      section: 'App Concept',
-      required: true,
-      options: [
-        'Close friends',
-        'Gym friends',
-        'Work colleagues',
-        'Online friends',
-        'I wouldn\'t use it with others'
-      ]
-    },
     // Section 4: Fairness & Proof
     {
-      name: 'proof_type',
-      label: 'What type of proof would you be comfortable submitting?',
-      type: 'radio',
-      section: 'Fairness & Proof',
-      required: true,
-      options: [
-        'Photos',
-        'Short videos',
-        'Health app data (steps, workouts, etc.)',
-        'Trust-based only'
-      ]
-    },
-    {
-      name: 'voting_comfort',
-      label: 'Would you be comfortable voting on other people\'s proof?',
-      type: 'radio',
-      section: 'Fairness & Proof',
-      required: true,
-      options: [
-        'Yes',
-        'Maybe',
-        'No'
-      ]
-    },
-    {
       name: 'goal_decision',
-      label: 'Who do you think should decide if a goal is completed?',
+      label: 'How should a goal hit be validated?',
       type: 'radio',
       section: 'Fairness & Proof',
       required: true,
       options: [
         'Group vote',
         'Personal Trainer',
-        'Combination of both',
-        'Automatic tracking only'
+        'Combination of both'
       ]
     },
     // Section 5: Money & PTs
@@ -246,8 +179,12 @@ const FormContainer = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log('Form submitted:', formData)
+    
+    // Save to local storage
+    saveSubmission(formData)
+    
     setIsSubmitted(true)
-    // TODO: Handle form submission (send to API, etc.)
+    // TODO: Handle form submission (send to Formspree, etc.)
   }
   
   const handleStart = () => {
