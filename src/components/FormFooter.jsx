@@ -27,10 +27,10 @@ const FormFooter = ({ currentStep, totalSteps, currentQuestion, formData, onNext
         {isLastStep ? (
           <button
             type="submit"
-            disabled={isAnswerRequired}
-            className={`btn-primary ${isAnswerRequired ? 'opacity-50 cursor-not-allowed' : ''}`}
+            disabled={isAnswerRequired || isSubmitting}
+            className={`btn-primary ${isAnswerRequired || isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
-            Submit Survey
+            {isSubmitting ? 'Submitting...' : 'Submit Survey'}
           </button>
         ) : (
           <button

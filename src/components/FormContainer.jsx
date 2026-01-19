@@ -11,6 +11,8 @@ const FormContainer = () => {
   const [currentStep, setCurrentStep] = useState(0)
   const [formData, setFormData] = useState({})
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState(null)
   
   const appDescription = "This app lets friends create fitness challenges together and put money into a shared pot. At the end of the challenge, only the people who hit their goals get a share of the pot. The goal of the app is to make fitness more motivating, social, and accountable."
   
@@ -176,15 +178,45 @@ const FormContainer = () => {
     }
   }
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('Form submitted:', formData)
+    setIsSubmitting(true)
+    setSubmitError(null)
     
-    // Save to local storage
-    saveSubmission(formData)
-    
-    setIsSubmitted(true)
-    // TODO: Handle form submission (send to Formspree, etc.)
+    try {
+      // Format data for Formspree (include question labels for better readability)
+      const formspreeData = {
+        ...formData,
+        _subject: 'Fitness App Survey Submission',
+        _format: 'plain'
+      }
+      
+      // Send to Formspree
+      const response = await fetch('https://formspree.io/f/mreekgzg', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(formspreeData)
+      })
+      
+      if (response.ok) {
+        // Save to local storage
+        saveSubmission(formData)
+        setIsSubmitted(true)
+      } else {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to submit form')
+      }
+    } catch (error) {
+      console.error('Form submission error:', error)
+      setSubmitError(error.message || 'Failed to submit. Please try again.')
+      // Still save to local storage even if Formspree fails
+      saveSubmission(formData)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
   
   const handleStart = () => {
@@ -239,6 +271,16 @@ const FormContainer = () => {
         />
         
         <form onSubmit={handleSubmit} className="p-8">
+          {submitError && (
+            <div className="mb-6 p-4 bg-red-900 border border-red-700 rounded-lg">
+              <p className="text-red-200 text-sm">
+                <strong>Error:</strong> {submitError}
+              </p>
+              <p className="text-red-300 text-xs mt-1">
+                Your response has been saved locally. You can view it in the submissions viewer.
+              </p>
+            </div>
+          )}
           <FormQuestions
             questions={questions}
             currentStep={currentStep}
@@ -253,6 +295,7 @@ const FormContainer = () => {
             formData={formData}
             onNext={handleNext}
             onPrevious={handlePrevious}
+            isSubmitting={isSubmitting}
           />
         </form>
       </div>
