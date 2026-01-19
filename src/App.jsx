@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import FormContainer from './components/FormContainer'
 import SubmissionsViewer from './components/SubmissionsViewer'
+import ErrorBoundary from './components/ErrorBoundary'
 import './App.css'
 
 function App() {
@@ -9,13 +10,19 @@ function App() {
   const viewMode = urlParams.get('view')
 
   if (viewMode === 'submissions') {
-    return <SubmissionsViewer />
+    return (
+      <ErrorBoundary>
+        <SubmissionsViewer />
+      </ErrorBoundary>
+    )
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <FormContainer />
-    </div>
+    <ErrorBoundary>
+      <div className="min-h-screen flex items-center justify-center p-4">
+        <FormContainer />
+      </div>
+    </ErrorBoundary>
   )
 }
 

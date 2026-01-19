@@ -180,18 +180,33 @@ const FormContainer = () => {
   
   const handleSubmit = async (e) => {
     e.preventDefault()
+    e.stopPropagation()
+    
+    console.log('Form submission started', { formData, currentStep, questionsLength: questions.length })
+    
     setIsSubmitting(true)
     setSubmitError(null)
     
+    // Always save to local storage first
     try {
-      // Format data for Formspree (include question labels for better readability)
+      saveSubmission(formData)
+      console.log('Saved to local storage')
+    } catch (saveError) {
+      console.error('Error saving to local storage:', saveError)
+    }
+    
+    // Set submitted state immediately to show success screen
+    setIsSubmitted(true)
+    setIsSubmitting(false)
+    
+    // Then try to send to Formspree in the background (don't wait for it)
+    try {
       const formspreeData = {
         ...formData,
         _subject: 'Fitness App Survey Submission',
         _format: 'plain'
       }
       
-      // Send to Formspree
       const response = await fetch('https://formspree.io/f/mreekgzg', {
         method: 'POST',
         headers: {
@@ -201,35 +216,14 @@ const FormContainer = () => {
         body: JSON.stringify(formspreeData)
       })
       
-      if (response.ok) {
-        // Save to local storage
-        saveSubmission(formData)
-        setIsSubmitted(true)
+      if (!response.ok) {
+        console.warn('Formspree submission failed, but data is saved locally')
       } else {
-        // Try to get error message, but don't fail if response isn't JSON
-        let errorMessage = 'Failed to submit form'
-        try {
-          const errorData = await response.json()
-          errorMessage = errorData.error || errorMessage
-        } catch (e) {
-          // Response wasn't JSON, use status text
-          errorMessage = response.statusText || errorMessage
-        }
-        throw new Error(errorMessage)
+        console.log('Formspree submission successful')
       }
     } catch (error) {
-      console.error('Form submission error:', error)
-      setSubmitError(error.message || 'Failed to submit. Please try again.')
-      // Still save to local storage even if Formspree fails
-      try {
-        saveSubmission(formData)
-        // Show success screen even if Formspree fails, since data is saved locally
-        setIsSubmitted(true)
-      } catch (saveError) {
-        console.error('Error saving to local storage:', saveError)
-      }
-    } finally {
-      setIsSubmitting(false)
+      console.error('Formspree submission error (non-blocking):', error)
+      // Don't show error to user since we already showed success
     }
   }
   
