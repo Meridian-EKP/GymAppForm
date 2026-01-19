@@ -178,7 +178,7 @@ const FormContainer = () => {
     }
   }
   
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     e.stopPropagation()
     
@@ -187,6 +187,7 @@ const FormContainer = () => {
       return
     }
     
+    // Mark as submitting
     setIsSubmitting(true)
     setSubmitError(null)
     
@@ -197,52 +198,50 @@ const FormContainer = () => {
       console.error('Error saving to local storage:', saveError)
     }
     
-    // Send to Formspree - this is the primary submission method
+    // Prepare Formspree data
+    const formspreeData = {
+      ...formData,
+      _subject: 'Fitness App Survey Submission',
+      _format: 'plain'
+    }
+    
+    // Stringify safely
+    let jsonBody
     try {
-      const formspreeData = {
-        ...formData,
-        _subject: 'Fitness App Survey Submission',
-        _format: 'plain'
-      }
-      
-      // Safely stringify
-      let jsonBody
-      try {
-        jsonBody = JSON.stringify(formspreeData)
-      } catch (stringifyError) {
-        throw new Error('Failed to prepare form data')
-      }
-      
-      // Send to Formspree - wait for response
-      const response = await fetch('https://formspree.io/f/mreekgzg', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: jsonBody
-      })
-      
-      if (response.ok) {
-        // Success - show success screen
-        setIsSubmitted(true)
-        setIsSubmitting(false)
-      } else {
-        // Formspree returned an error, but data is saved locally
-        const errorData = await response.json().catch(() => ({}))
-        setSubmitError(errorData.error || 'Failed to submit to Formspree')
-        // Still show success since data is saved locally
-        setIsSubmitted(true)
-        setIsSubmitting(false)
-      }
-    } catch (error) {
-      // Network error or other issue
-      console.error('Formspree submission error:', error)
-      setSubmitError('Network error - your data has been saved locally')
-      // Show success screen since data is saved locally
+      jsonBody = JSON.stringify(formspreeData)
+    } catch (stringifyError) {
+      console.error('Error stringifying form data:', stringifyError)
+      // Even if stringify fails, show success screen
       setIsSubmitted(true)
       setIsSubmitting(false)
+      return
     }
+    
+    // Show success screen immediately (don't wait for Formspree)
+    setIsSubmitted(true)
+    setIsSubmitting(false)
+    
+    // Send to Formspree in the background - this is critical for client
+    // Use a separate async function to avoid blocking
+    ;(async () => {
+      try {
+        const response = await fetch('https://formspree.io/f/mreekgzg', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: jsonBody
+        })
+        
+        if (!response.ok) {
+          console.warn('Formspree returned non-OK status:', response.status)
+        }
+      } catch (error) {
+        // Log but don't show to user - data is already saved locally
+        console.error('Formspree submission error:', error)
+      }
+    })()
   }
   
   const handleStart = () => {
