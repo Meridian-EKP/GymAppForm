@@ -10,9 +10,7 @@ if (!root) {
 } else {
   try {
     ReactDOM.createRoot(root).render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>,
+      <App />
     )
   } catch (error) {
     console.error('Error rendering app:', error)

@@ -1,4 +1,4 @@
-const FormFooter = ({ currentStep, totalSteps, currentQuestion, formData, onNext, onPrevious }) => {
+const FormFooter = ({ currentStep, totalSteps, currentQuestion, formData, onNext, onPrevious, isSubmitting }) => {
   if (totalSteps === 0) {
     return null
   }
