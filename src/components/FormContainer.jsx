@@ -206,14 +206,28 @@ const FormContainer = () => {
         saveSubmission(formData)
         setIsSubmitted(true)
       } else {
-        const errorData = await response.json()
-        throw new Error(errorData.error || 'Failed to submit form')
+        // Try to get error message, but don't fail if response isn't JSON
+        let errorMessage = 'Failed to submit form'
+        try {
+          const errorData = await response.json()
+          errorMessage = errorData.error || errorMessage
+        } catch (e) {
+          // Response wasn't JSON, use status text
+          errorMessage = response.statusText || errorMessage
+        }
+        throw new Error(errorMessage)
       }
     } catch (error) {
       console.error('Form submission error:', error)
       setSubmitError(error.message || 'Failed to submit. Please try again.')
       // Still save to local storage even if Formspree fails
-      saveSubmission(formData)
+      try {
+        saveSubmission(formData)
+        // Show success screen even if Formspree fails, since data is saved locally
+        setIsSubmitted(true)
+      } catch (saveError) {
+        console.error('Error saving to local storage:', saveError)
+      }
     } finally {
       setIsSubmitting(false)
     }
